@@ -1,10 +1,7 @@
 import React, {useState} from "react";
 
-function ListingCard({listing, id, description, imageSrc, location, deleteListing}) {
+function ListingCard({listing, description, imageSrc, location, deleteListing}) {
 
-  // const { id, description, imageSrc, location } = listing
-
-  // console.log(description, imageSrc, location)
   let [ifLikes, setIfLikes] = useState(false)
   function handleClick(){
      setIfLikes(ifLikes = !ifLikes)

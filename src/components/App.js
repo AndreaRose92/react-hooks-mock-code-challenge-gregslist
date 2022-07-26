@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import ListingsContainer from "./ListingsContainer";
+import ListingForm from "./ListingForm";
 
 function App() {
   
   const url = 'http://localhost:6001/listings'
   const [listings, setListings] = useState([])
-  
-  let [search, setSearch] = useState("")
-
+  const [search, setSearch] = useState('')
+  const [newListing, setNewListing] = useState({})
 
 
   useEffect(()=>{
@@ -16,31 +16,45 @@ function App() {
       .then(r=>r.json())
       .then(data=>setListings(data))}, [])
 
-  // console.log(listings)
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setSearch(e.target.value)
-  }
-
-
   function deleteListing(deletedListing) {
     const updatedListings = listings.filter((listing) => listing.id !== deletedListing.id)
     setListings(updatedListings)
   }
 
+  
+  function handleSubmit(e){
+    e.preventDefault()
+    setNewListing({description:e.target.description.value, image:e.target.image.value, location:e.target.location.value})
+    fetch(`${url}`,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "description": e.target.description.value,
+        "image": e.target.image.value,
+        'location':e.target.location.value
+      })
+    })
+      .then(r=>r.json())
+      .then(newListing=>setListings([...listings, newListing]))
+  
+  }
 
-  const searchResults = listings.filter(listing => {
+  const submitSearch = someString => {
+    setSearch(someString)
+  }
+
+  const searchedListings = listings.filter((listing)=>{
     return listing.description.toLowerCase().includes(search.toLowerCase())
   })
 
   return (
     <div className="app">
-      <Header handleSearch={handleSubmit}/>
-      <ListingsContainer listings={searchResults}
-        deleteListing={deleteListing}
-      />
+      <Header onSubmit={submitSearch} />
+      <ListingForm onFormSubmit={handleSubmit} />
+      <ListingsContainer listings={searchedListings}
+        deleteListing={deleteListing} />
     </div>
   );
 }
