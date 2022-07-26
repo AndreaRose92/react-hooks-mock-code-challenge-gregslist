@@ -14,10 +14,17 @@ function App() {
 
   // console.log(listings)
 
+  function deleteListing(deletedListing) {
+    const updatedListings = listings.filter((listing) => listing.id !== deletedListing.id)
+    setListings(updatedListings)
+  }
+
   return (
     <div className="app">
       <Header />
-      <ListingsContainer listings={listings} />
+      <ListingsContainer listings={listings}
+        deleteListing={deleteListing}
+      />
     </div>
   );
 }
