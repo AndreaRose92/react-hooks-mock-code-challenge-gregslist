@@ -4,7 +4,7 @@ function ListingCard({listing, id, description, imageSrc, location, deleteListin
 
   // const { id, description, imageSrc, location } = listing
 
-  console.log(description, imageSrc, location)
+  // console.log(description, imageSrc, location)
   let [ifLikes, setIfLikes] = useState(false)
   function handleClick(){
      setIfLikes(ifLikes = !ifLikes)

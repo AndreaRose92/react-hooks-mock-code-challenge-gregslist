@@ -1,22 +1,16 @@
 import React from "react";
 
-function Search({handleSearch}) {
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log("submitted");
-  }
+function Search({handleSubmit}) {
 
   return (
-    <form className="searchbar" onSubmit={handleSubmit}>
+    <form className="searchbar" >
       <input 
         type="text"
         id="search"
         placeholder="search free stuff"
-        onChange={(e)=>{
-          handleSearch(e)
-        }}
+        onChange={e=>e.target.value}
       />
-      <button type="submit">🔍</button>
+      <button type="submit" onSubmit={handleSubmit}>🔍</button>
     </form>
   );
 }

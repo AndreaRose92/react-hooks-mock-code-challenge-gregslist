@@ -7,15 +7,8 @@ function App() {
   const url = 'http://localhost:6001/listings'
   const [listings, setListings] = useState([])
   
-  const [search, setSearch] = useState("")
+  let [search, setSearch] = useState("")
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value)
-  }
-
-  const searchResults = listings.filter(listing => {
-    return listing.description.toLowerCase().includes(search.toLowerCase())
-  })
 
 
   useEffect(()=>{
@@ -25,14 +18,26 @@ function App() {
 
   // console.log(listings)
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setSearch(e.target.value)
+  }
+
+
   function deleteListing(deletedListing) {
     const updatedListings = listings.filter((listing) => listing.id !== deletedListing.id)
     setListings(updatedListings)
   }
 
+
+  const searchResults = listings.filter(listing => {
+    return listing.description.toLowerCase().includes(search.toLowerCase())
+  })
+
   return (
     <div className="app">
-      <Header handleSearch={handleSearch}/>
+      <Header handleSearch={handleSubmit}/>
       <ListingsContainer listings={searchResults}
         deleteListing={deleteListing}
       />
