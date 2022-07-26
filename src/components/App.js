@@ -3,9 +3,20 @@ import Header from "./Header";
 import ListingsContainer from "./ListingsContainer";
 
 function App() {
-
+  
   const url = 'http://localhost:6001/listings'
   const [listings, setListings] = useState([])
+  
+  const [search, setSearch] = useState("")
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  }
+
+  const searchResults = listings.filter(listing => {
+    return listing.description.toLowerCase().includes(search.toLowerCase())
+  })
+
 
   useEffect(()=>{
     fetch(`${url}`)
@@ -21,8 +32,8 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
-      <ListingsContainer listings={listings}
+      <Header handleSearch={handleSearch}/>
+      <ListingsContainer listings={searchResults}
         deleteListing={deleteListing}
       />
     </div>
