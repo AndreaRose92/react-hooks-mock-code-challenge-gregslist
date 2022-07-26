@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 
 function ListingCard({description, imageSrc, location}) {
 
   console.log(description, imageSrc, location)
-
+  let [ifLikes, setIfLikes] = useState(false)
+  function handleClick(){
+     setIfLikes(ifLikes = !ifLikes)
+  }
 
   return (
     <li className="card">
@@ -12,10 +15,10 @@ function ListingCard({description, imageSrc, location}) {
         <img src={imageSrc} alt={"description"} />
       </div>
       <div className="details">
-        {true ? (
-          <button className="emoji-button favorite active">★</button>
+        {ifLikes ? (
+          <button onClick = {handleClick} className="emoji-button favorite active">★</button>
         ) : (
-          <button className="emoji-button favorite">☆</button>
+          <button onClick = {handleClick} className="emoji-button favorite">☆</button>
         )}
         <strong>{description}</strong>
         <span> · {location}</span>
