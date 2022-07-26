@@ -1,12 +1,6 @@
 {
   "listings": [
     {
-      "id": 1,
-      "description": "heater",
-      "image": "./images/heater.jpg",
-      "location": "BROOKLYN"
-    },
-    {
       "id": 4,
       "description": "FREE Hundreds of DVD/CD Cases - Different Sizes and Colors",
       "image": "./images/dvd-cases.jpg",

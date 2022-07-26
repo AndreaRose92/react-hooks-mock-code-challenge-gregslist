@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 
-function ListingCard({ description, imageSrc, location, deleteListing}) {
+function ListingCard({listing, id, description, imageSrc, location, deleteListing}) {
+
+  // const { id, description, imageSrc, location } = listing
 
   console.log(description, imageSrc, location)
   let [ifLikes, setIfLikes] = useState(false)
@@ -12,12 +14,11 @@ function ListingCard({ description, imageSrc, location, deleteListing}) {
     fetch(`http://localhost:6001/listings/${listing.id}`, {
       method: 'DELETE'
     })
-    .then((res) => res.json())
-    .then(() => {deleteListing()})
+    .then(() => {deleteListing(listing)})
   }
 
   return (
-    <li className="card">
+    <li className="card" >
       <div className="image">
         <span className="price">$0</span>
         <img src={imageSrc} alt={"description"} />

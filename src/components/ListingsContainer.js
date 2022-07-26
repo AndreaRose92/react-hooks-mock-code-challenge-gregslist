@@ -3,10 +3,11 @@ import ListingCard from "./ListingCard";
 
 function ListingsContainer({listings, deleteListing}) {
 
-  // console.log(listings)
+  console.log(listings)
 
   const listingsToDisplay = listings.map((listing)=>{
     return <ListingCard 
+      listing={listing}
       key={listing.id} 
       id={listing.id}
       description={listing.description} 
